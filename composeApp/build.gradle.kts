@@ -1,15 +1,20 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.googleKsp)
 }
 
 kotlin {
+    configureCommonMainKsp()
+
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -36,6 +41,9 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.kotlin.inject.core.runtime)
+            implementation(libs.kotlin.inject.anvil.runtime)
+            implementation(libs.kotlin.inject.anvil.runtime.optional)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -93,6 +101,26 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "com.plusmobileapps.sample.anvilkmp"
             packageVersion = "1.0.0"
+        }
+    }
+}
+
+dependencies {
+    kspCommonMainMetadata(libs.kotlin.inject.core.compiler)
+    kspCommonMainMetadata(libs.kotlin.inject.anvil.compiler)
+    commonMainImplementation(libs.kotlin.inject.core.runtime)
+    commonMainImplementation(libs.kotlin.inject.anvil.runtime)
+    commonMainImplementation(libs.kotlin.inject.anvil.runtime.optional)
+}
+
+fun KotlinMultiplatformExtension.configureCommonMainKsp() {
+    sourceSets.named("commonMain").configure {
+        kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+    }
+
+    project.tasks.withType(KotlinCompilationTask::class.java).configureEach {
+        if(name != "kspCommonMainKotlinMetadata") {
+            dependsOn("kspCommonMainKotlinMetadata")
         }
     }
 }
