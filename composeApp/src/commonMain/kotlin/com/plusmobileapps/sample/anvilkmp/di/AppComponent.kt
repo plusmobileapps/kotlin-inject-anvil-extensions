@@ -1,5 +1,6 @@
 package com.plusmobileapps.sample.anvilkmp.di
 
+import com.plusmobileapps.sample.anvilkmp.di.CoroutineConstants.IO
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import me.tatarka.inject.annotations.Component
@@ -25,7 +26,7 @@ interface Repository {
 @SingleIn(AppScope::class)
 @ContributesBinding(AppScope::class, boundType = Repository::class)
 class RepositoryImpl(
-    @Named("IO") private val ioDispatcher: CoroutineContext,
+    @Named(IO) private val ioDispatcher: CoroutineContext,
 ) : Repository {
     override suspend fun get(): String = withContext(ioDispatcher) {
         delay(1000L)

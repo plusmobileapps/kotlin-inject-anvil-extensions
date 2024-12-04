@@ -8,21 +8,32 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesTo
 import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
 import kotlin.coroutines.CoroutineContext
 
+data object CoroutineConstants {
+    const val IO = "IO"
+    const val MAIN = "MAIN"
+    const val DEFAULT = "DEFAULT"
+    const val UNCONFINED = "UNCONFINED"
+}
+
 @ContributesTo(AppScope::class)
 interface CoroutineDispatchersModule {
     @Provides
     @SingleIn(AppScope::class)
-    fun ioDispatcher(): @Named("IO") CoroutineContext = Dispatchers.IO
+    fun ioDispatcher(): @Named(CoroutineConstants.IO) CoroutineContext =
+        Dispatchers.IO
 
     @Provides
     @SingleIn(AppScope::class)
-    fun mainDispatcher(): @Named("MAIN") CoroutineContext = Dispatchers.Main
+    fun mainDispatcher(): @Named(CoroutineConstants.MAIN) CoroutineContext =
+        Dispatchers.Main
 
     @Provides
     @SingleIn(AppScope::class)
-    fun defaultDispatcher(): @Named("DEFAULT") CoroutineContext = Dispatchers.Default
+    fun defaultDispatcher(): @Named(CoroutineConstants.DEFAULT) CoroutineContext =
+        Dispatchers.Default
 
     @Provides
     @SingleIn(AppScope::class)
-    fun unconfinedDispatcher(): @Named("UNCONFINED") CoroutineContext = Dispatchers.Unconfined
+    fun unconfinedDispatcher(): @Named(CoroutineConstants.UNCONFINED) CoroutineContext =
+        Dispatchers.Unconfined
 }
