@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.googleKsp)
+    alias(libs.plugins.serialization)
 }
 
 kotlin {
@@ -54,6 +55,9 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(libs.arkivanov.decompose.core)
+            implementation(libs.arkivanov.decompose.compose.extensions)
+            implementation(libs.kotlin.serialization.json)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
