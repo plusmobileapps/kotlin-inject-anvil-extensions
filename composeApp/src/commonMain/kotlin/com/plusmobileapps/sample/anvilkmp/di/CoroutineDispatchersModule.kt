@@ -3,37 +3,67 @@ package com.plusmobileapps.sample.anvilkmp.di
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import me.tatarka.inject.annotations.Provides
+import me.tatarka.inject.annotations.Qualifier
 import software.amazon.lastmile.kotlin.inject.anvil.AppScope
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesTo
 import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
 import kotlin.coroutines.CoroutineContext
 
-data object CoroutineConstants {
-    const val IO = "IO"
-    const val MAIN = "MAIN"
-    const val DEFAULT = "DEFAULT"
-    const val UNCONFINED = "UNCONFINED"
-}
+@Qualifier
+@Target(
+    AnnotationTarget.PROPERTY_GETTER,
+    AnnotationTarget.FUNCTION,
+    AnnotationTarget.VALUE_PARAMETER,
+    AnnotationTarget.TYPE
+)
+annotation class IO
+
+@Qualifier
+@Target(
+    AnnotationTarget.PROPERTY_GETTER,
+    AnnotationTarget.FUNCTION,
+    AnnotationTarget.VALUE_PARAMETER,
+    AnnotationTarget.TYPE
+)
+annotation class Main
+
+@Qualifier
+@Target(
+    AnnotationTarget.PROPERTY_GETTER,
+    AnnotationTarget.FUNCTION,
+    AnnotationTarget.VALUE_PARAMETER,
+    AnnotationTarget.TYPE
+)
+annotation class Default
+
+@Qualifier
+@Target(
+    AnnotationTarget.PROPERTY_GETTER,
+    AnnotationTarget.FUNCTION,
+    AnnotationTarget.VALUE_PARAMETER,
+    AnnotationTarget.TYPE
+)
+annotation class Unconfined
 
 @ContributesTo(AppScope::class)
 interface CoroutineDispatchersModule {
     @Provides
     @SingleIn(AppScope::class)
-    fun ioDispatcher(): @Named(CoroutineConstants.IO) CoroutineContext =
+    fun ioDispatcher(): @IO CoroutineContext =
         Dispatchers.IO
 
     @Provides
     @SingleIn(AppScope::class)
-    fun mainDispatcher(): @Named(CoroutineConstants.MAIN) CoroutineContext =
+    fun mainDispatcher(): @Main CoroutineContext =
         Dispatchers.Main
 
     @Provides
     @SingleIn(AppScope::class)
-    fun defaultDispatcher(): @Named(CoroutineConstants.DEFAULT) CoroutineContext =
+    fun defaultDispatcher(): @Default CoroutineContext =
         Dispatchers.Default
 
     @Provides
     @SingleIn(AppScope::class)
-    fun unconfinedDispatcher(): @Named(CoroutineConstants.UNCONFINED) CoroutineContext =
+    fun unconfinedDispatcher(): @Unconfined CoroutineContext =
         Dispatchers.Unconfined
 }

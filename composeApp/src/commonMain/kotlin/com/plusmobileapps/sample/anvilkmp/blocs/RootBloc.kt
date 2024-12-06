@@ -17,9 +17,11 @@ interface RootBloc {
     }
 }
 
+typealias RootBlocFactory = (ComponentContext) -> RootBloc
+
 class RootBlocImpl(
     @Assisted context: ComponentContext,
-    private val homeBloc: (context: ComponentContext, output: Consumer<HomeBloc.Output>) -> HomeBloc,
+    private val homeBloc: HomeBlocFactory,
 ) : RootBloc, ComponentContext by context {
 
     private val navigation = StackNavigation<Configuration>()

@@ -20,6 +20,8 @@ interface HomeBloc {
     }
 }
 
+typealias HomeBlocFactory = (context: ComponentContext, output: Consumer<HomeBloc.Output>) -> HomeBloc
+
 class HomeBlocImpl(
     repository: Repository,
     context: ComponentContext,

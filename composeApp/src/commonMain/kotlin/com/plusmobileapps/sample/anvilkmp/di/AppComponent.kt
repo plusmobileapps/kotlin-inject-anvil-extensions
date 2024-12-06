@@ -2,8 +2,10 @@ package com.plusmobileapps.sample.anvilkmp.di
 
 import com.arkivanov.decompose.ComponentContext
 import com.plusmobileapps.sample.anvilkmp.blocs.HomeBloc
+import com.plusmobileapps.sample.anvilkmp.blocs.HomeBlocFactory
 import com.plusmobileapps.sample.anvilkmp.blocs.HomeBlocImpl
 import com.plusmobileapps.sample.anvilkmp.blocs.RootBloc
+import com.plusmobileapps.sample.anvilkmp.blocs.RootBlocFactory
 import com.plusmobileapps.sample.anvilkmp.blocs.RootBlocImpl
 import com.plusmobileapps.sample.anvilkmp.data.Repository
 import com.plusmobileapps.sample.anvilkmp.util.Consumer
@@ -16,13 +18,13 @@ import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
 @MergeComponent(AppScope::class)
 @SingleIn(AppScope::class)
 interface AppComponent {
-    abstract val rootBlocFactory: (ComponentContext) -> RootBloc
+    abstract val rootBlocFactory: RootBlocFactory
     abstract val repository: Repository
 
     @Provides
     fun provideRootBloc(
         @Assisted context: ComponentContext,
-        homeBloc: (context: ComponentContext, output: Consumer<HomeBloc.Output>) -> HomeBloc,
+        homeBloc: HomeBlocFactory,
     ): RootBloc = RootBlocImpl(context = context, homeBloc = homeBloc)
 
     @Provides
