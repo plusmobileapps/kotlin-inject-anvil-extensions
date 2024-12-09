@@ -1,12 +1,13 @@
 package com.plusmobileapps.sample.anvilkmp
 
 import com.plusmobileapps.sample.anvilkmp.di.AppComponent
-import com.plusmobileapps.sample.anvilkmp.di.Singleton
-import me.tatarka.inject.annotations.Component
 import me.tatarka.inject.annotations.KmpComponentCreate
+import software.amazon.lastmile.kotlin.inject.anvil.AppScope
+import software.amazon.lastmile.kotlin.inject.anvil.MergeComponent
+import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
 
-@Component
-@Singleton
+@MergeComponent(AppScope::class)
+@SingleIn(AppScope::class)
 abstract class IosAppComponent : AppComponent {
 
     companion object

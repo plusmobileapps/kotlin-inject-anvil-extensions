@@ -12,9 +12,8 @@ import com.plusmobileapps.sample.anvilkmp.util.Consumer
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Provides
 
-interface AppComponent: DataComponent, CoroutineDispatchersModule {
+interface AppComponent: CoroutineDispatchersModule {
     abstract val rootBlocFactory: RootBlocFactory
-    abstract val repository: Repository
 
     @Provides
     fun provideRootBloc(
