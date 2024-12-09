@@ -14,8 +14,6 @@ plugins {
 }
 
 kotlin {
-    configureCommonMainKsp()
-
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -43,8 +41,8 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.kotlin.inject.core.runtime)
-            implementation(libs.kotlin.inject.anvil.runtime)
-            implementation(libs.kotlin.inject.anvil.runtime.optional)
+//            implementation(libs.kotlin.inject.anvil.runtime)
+//            implementation(libs.kotlin.inject.anvil.runtime.optional)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -64,6 +62,8 @@ kotlin {
             implementation(libs.kotlinx.coroutines.swing)
         }
     }
+
+    configureCommonMainKsp()
 }
 
 android {
@@ -109,12 +109,27 @@ compose.desktop {
     }
 }
 
+ksp {
+    arg("me.tatarka.inject.generateCompanionExtensions", "true")
+}
+
 dependencies {
+    // kotlin-inject
     kspCommonMainMetadata(libs.kotlin.inject.core.compiler)
-    kspCommonMainMetadata(libs.kotlin.inject.anvil.compiler)
     commonMainImplementation(libs.kotlin.inject.core.runtime)
-    commonMainImplementation(libs.kotlin.inject.anvil.runtime)
-    commonMainImplementation(libs.kotlin.inject.anvil.runtime.optional)
+    add("kspAndroid", libs.kotlin.inject.core.compiler)
+    add("kspIosX64", libs.kotlin.inject.core.compiler)
+    add("kspIosArm64", libs.kotlin.inject.core.compiler)
+    add("kspIosSimulatorArm64", libs.kotlin.inject.core.compiler)
+
+    // kotlin-inject-anvil
+//    kspCommonMainMetadata(libs.kotlin.inject.anvil.compiler)
+//    commonMainImplementation(libs.kotlin.inject.anvil.runtime)
+//    commonMainImplementation(libs.kotlin.inject.anvil.runtime.optional)
+//    add("kspAndroid", libs.kotlin.inject.anvil.compiler)
+//    add("kspIosX64", libs.kotlin.inject.anvil.compiler)
+//    add("kspIosArm64", libs.kotlin.inject.anvil.compiler)
+//    add("kspIosSimulatorArm64", libs.kotlin.inject.anvil.compiler)
 }
 
 fun KotlinMultiplatformExtension.configureCommonMainKsp() {
