@@ -1,16 +1,24 @@
 package com.plusmobileapps.sample.anvilkmp
 
 import com.plusmobileapps.sample.anvilkmp.di.AppComponent
-import com.plusmobileapps.sample.anvilkmp.di.Singleton
-import me.tatarka.inject.annotations.Component
-import me.tatarka.inject.annotations.KmpComponentCreate
+import me.tatarka.inject.annotations.Provides
+import platform.UIKit.UIApplication
+import software.amazon.lastmile.kotlin.inject.anvil.AppScope
+import software.amazon.lastmile.kotlin.inject.anvil.MergeComponent
+import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
+import kotlin.reflect.KClass
 
-@Component
-@Singleton
-abstract class IosAppComponent : AppComponent {
+@MergeComponent(AppScope::class)
+@SingleIn(AppScope::class)
+abstract class IosAppComponent(
+    @get:Provides val application: UIApplication,
+) : AppComponent
 
-    companion object
-}
-
-@KmpComponentCreate
-expect fun IosAppComponent.Companion.createComponent(): IosAppComponent
+/**
+ * The `actual fun` will be generated for each iOS specific target. See [MergeComponent] for
+ * more details.
+ */
+@MergeComponent.CreateComponent
+expect fun KClass<IosAppComponent>.createIosAppComponent(
+    application: UIApplication
+): IosAppComponent

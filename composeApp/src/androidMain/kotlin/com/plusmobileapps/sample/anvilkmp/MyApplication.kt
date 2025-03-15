@@ -7,6 +7,6 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        component = AndroidAppComponent.create(this)
+        component = AndroidAppComponent::class.create(this)
     }
 }
