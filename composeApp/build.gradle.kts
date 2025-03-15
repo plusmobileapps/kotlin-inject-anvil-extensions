@@ -111,10 +111,6 @@ compose.desktop {
     }
 }
 
-ksp {
-//    arg("me.tatarka.inject.generateCompanionExtensions", "true")
-}
-
 dependencies {
     val targets = listOf(
         "kspAndroid",
