@@ -1,6 +1,7 @@
 package com.plusmobileapps.sample.anvilkmp.ui
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -19,10 +20,13 @@ fun HomeScreen(
     val models = bloc.models.subscribeAsState()
 
     Scaffold(
+        modifier = modifier.fillMaxSize(),
         topBar = { TopAppBar(title = { Text("Home") }) }
     ) {
         Box(
-            modifier = Modifier.padding(it),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it),
             contentAlignment = Alignment.Center,
         ) {
             Text(text = models.value.greeting.greet())

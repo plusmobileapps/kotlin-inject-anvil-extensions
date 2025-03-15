@@ -12,7 +12,7 @@ import com.plusmobileapps.sample.anvilkmp.util.Consumer
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Provides
 
-interface AppComponent: CoroutineDispatchersModule {
+interface AppComponent : CoroutineDispatchersModule {
     abstract val rootBlocFactory: RootBlocFactory
 
     @Provides

@@ -15,7 +15,7 @@ interface Repository {
 
 @Inject
 @SingleIn(AppScope::class)
-@ContributesBinding(AppScope::class, boundType = Repository::class)
+@ContributesBinding(scope = AppScope::class, boundType = Repository::class)
 class RepositoryImpl(
     @IO private val ioDispatcher: CoroutineContext,
 ) : Repository {

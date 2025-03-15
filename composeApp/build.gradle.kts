@@ -33,7 +33,9 @@ kotlin {
     }
     
     jvm("desktop")
-    
+
+    applyDefaultHierarchyTemplate()
+
     sourceSets {
         val desktopMain by getting
         
@@ -110,26 +112,29 @@ compose.desktop {
 }
 
 ksp {
-    arg("me.tatarka.inject.generateCompanionExtensions", "true")
+//    arg("me.tatarka.inject.generateCompanionExtensions", "true")
 }
 
 dependencies {
+    val targets = listOf(
+        "kspAndroid",
+        "kspIosX64",
+        "kspIosArm64",
+        "kspIosSimulatorArm64"
+    )
     // kotlin-inject
     kspCommonMainMetadata(libs.kotlin.inject.core.compiler)
     commonMainImplementation(libs.kotlin.inject.core.runtime)
-    add("kspAndroid", libs.kotlin.inject.core.compiler)
-    add("kspIosX64", libs.kotlin.inject.core.compiler)
-    add("kspIosArm64", libs.kotlin.inject.core.compiler)
-    add("kspIosSimulatorArm64", libs.kotlin.inject.core.compiler)
+    targets.forEach {
+        add(it, libs.kotlin.inject.core.compiler)
+    }
 
     // kotlin-inject-anvil
-    kspCommonMainMetadata(libs.kotlin.inject.anvil.compiler)
     commonMainImplementation(libs.kotlin.inject.anvil.runtime)
     commonMainImplementation(libs.kotlin.inject.anvil.runtime.optional)
-    add("kspAndroid", libs.kotlin.inject.anvil.compiler)
-    add("kspIosX64", libs.kotlin.inject.anvil.compiler)
-    add("kspIosArm64", libs.kotlin.inject.anvil.compiler)
-    add("kspIosSimulatorArm64", libs.kotlin.inject.anvil.compiler)
+    targets.forEach {
+        add(it, libs.kotlin.inject.anvil.compiler)
+    }
 }
 
 fun KotlinMultiplatformExtension.configureCommonMainKsp() {
