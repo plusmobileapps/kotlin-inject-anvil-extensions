@@ -5,6 +5,7 @@ import kotlinx.coroutines.IO
 import me.tatarka.inject.annotations.Provides
 import me.tatarka.inject.annotations.Qualifier
 import software.amazon.lastmile.kotlin.inject.anvil.AppScope
+import software.amazon.lastmile.kotlin.inject.anvil.ContributesTo
 import software.amazon.lastmile.kotlin.inject.anvil.SingleIn
 import kotlin.coroutines.CoroutineContext
 
@@ -44,7 +45,9 @@ annotation class Default
 )
 annotation class Unconfined
 
-interface CoroutineDispatchersModule {
+@ContributesTo(AppScope::class)
+@SingleIn(AppScope::class)
+interface CoroutineDispatchersComponent {
     @Provides
     @SingleIn(AppScope::class)
     fun ioDispatcher(): @IO CoroutineContext =
