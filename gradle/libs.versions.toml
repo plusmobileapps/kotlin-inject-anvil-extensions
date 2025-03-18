@@ -11,13 +11,19 @@ androidx-espresso-core = "3.6.1"
 androidx-lifecycle = "2.8.4"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
+autoservice = "1.1.1"
+autoservice-ksp = "1.2.0"
 compose-multiplatform = "1.7.3"
 google-ksp = "2.1.10-1.0.30"
+junit-jupiter = "5.12.1"
 junit = "4.13.2"
+kotest = "5.9.1"
 kotlin = "2.1.10"
+kotlin-compile-testing = "0.7.0"
 kotlinx-coroutines = "1.9.0"
 kotlin-inject-core = "0.7.2"
 kotlin-inject-anvil= "0.1.2"
+kotlin-poet = "2.1.0"
 decompose = "3.1.0"
 essenty = "2.1.0"
 
@@ -36,12 +42,25 @@ androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", nam
 androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 arkivanov-decompose-core = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
 arkivanov-decompose-compose-extensions = { group = "com.arkivanov.decompose", name = "extensions-compose", version.ref = "decompose" }
+auto-service-annotations = { module = "com.google.auto.service:auto-service-annotations", version.ref = "autoservice" }
+auto-service-ksp = { module = "dev.zacsweers.autoservice:auto-service-ksp", version.ref = "autoservice-ksp" }
+junit-jupiter-bom = { module = "org.junit:junit-bom", version.ref = "junit-jupiter" }
+junit-jupiter-core = { module = "org.junit.jupiter:junit-jupiter" }
+junit-jupiter-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
+kotlin-compile-testing-core = { module = "dev.zacsweers.kctfork:core", version.ref = "kotlin-compile-testing" }
+kotlin-compile-testing-ksp = { module = "dev.zacsweers.kctfork:ksp", version.ref = "kotlin-compile-testing" }
 kotlin-inject-core-compiler = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp", version.ref = "kotlin-inject-core" }
 kotlin-inject-core-runtime = { module = "me.tatarka.inject:kotlin-inject-runtime", version.ref = "kotlin-inject-core" }
 kotlin-inject-anvil-compiler = { module = "software.amazon.lastmile.kotlin.inject.anvil:compiler", version.ref = "kotlin-inject-anvil" }
 kotlin-inject-anvil-runtime = { module = "software.amazon.lastmile.kotlin.inject.anvil:runtime", version.ref = "kotlin-inject-anvil" }
 kotlin-inject-anvil-runtime-optional = { module = "software.amazon.lastmile.kotlin.inject.anvil:runtime-optional", version.ref = "kotlin-inject-anvil" }
+kotlin-poet = { module = "com.squareup:kotlinpoet", version.ref = "kotlin-poet" }
+kotlin-poet-ksp = { module = "com.squareup:kotlinpoet-ksp", version.ref = "kotlin-poet" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+ksp-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "google-ksp" }
 kotlin-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3"
 
 [plugins]
@@ -49,6 +68,7 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 googleKsp = { id = "com.google.devtools.ksp", version.ref = "google-ksp" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

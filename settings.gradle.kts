@@ -29,3 +29,5 @@ dependencyResolutionManagement {
 }
 
 include(":composeApp")
+include(":lib:compiler")
+include(":lib:runtime")
