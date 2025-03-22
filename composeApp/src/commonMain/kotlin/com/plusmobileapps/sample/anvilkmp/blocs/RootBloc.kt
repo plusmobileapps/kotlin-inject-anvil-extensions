@@ -45,7 +45,7 @@ class RootBlocImpl(
     ): RootBloc.Child =
         when (configuration) {
             Configuration.Home -> RootBloc.Child.Home(
-                homeBloc(componentContext, ::onHomeOutput)
+                homeBloc.create(componentContext, ::onHomeOutput)
             )
         }
 
