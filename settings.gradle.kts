@@ -11,8 +11,8 @@ pluginManagement {
             }
         }
         mavenCentral()
-        mavenLocal()
         gradlePluginPortal()
+        maven("https://oss.sonatype.org/content/repositories/snapshots/")
     }
 }
 
@@ -25,7 +25,7 @@ dependencyResolutionManagement {
                 includeGroupAndSubgroups("com.google")
             }
         }
-        mavenLocal()
+        maven("https://oss.sonatype.org/content/repositories/snapshots/")
         mavenCentral()
     }
 }
