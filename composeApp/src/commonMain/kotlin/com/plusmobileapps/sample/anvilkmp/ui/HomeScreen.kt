@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
-import com.plusmobileapps.sample.anvilkmp.blocs.HomeBloc
+import com.plusmobileapps.sample.anvilkmp.blocs.home.HomeBloc
 
 @Composable
 fun HomeScreen(

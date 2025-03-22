@@ -1,12 +1,12 @@
 package com.plusmobileapps.sample.anvilkmp.di
 
 import com.arkivanov.decompose.ComponentContext
-import com.plusmobileapps.sample.anvilkmp.blocs.HomeBloc
-import com.plusmobileapps.sample.anvilkmp.blocs.HomeBlocFactory
-import com.plusmobileapps.sample.anvilkmp.blocs.HomeBlocImpl
-import com.plusmobileapps.sample.anvilkmp.blocs.RootBloc
-import com.plusmobileapps.sample.anvilkmp.blocs.RootBlocFactory
-import com.plusmobileapps.sample.anvilkmp.blocs.RootBlocImpl
+import com.plusmobileapps.sample.anvilkmp.blocs.home.HomeBloc
+import com.plusmobileapps.sample.anvilkmp.blocs.home.HomeBlocFactory
+import com.plusmobileapps.sample.anvilkmp.blocs.home.HomeBlocImpl
+import com.plusmobileapps.sample.anvilkmp.blocs.root.RootBloc
+import com.plusmobileapps.sample.anvilkmp.blocs.root.RootBlocFactory
+import com.plusmobileapps.sample.anvilkmp.blocs.root.RootBlocImpl
 import com.plusmobileapps.sample.anvilkmp.data.Repository
 import com.plusmobileapps.sample.anvilkmp.util.Consumer
 import me.tatarka.inject.annotations.Assisted

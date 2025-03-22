@@ -20,7 +20,7 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -31,14 +31,14 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     jvm("desktop")
 
     applyDefaultHierarchyTemplate()
 
     sourceSets {
         val desktopMain by getting
-        
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
@@ -139,7 +139,7 @@ fun KotlinMultiplatformExtension.configureCommonMainKsp() {
     }
 
     project.tasks.withType(KotlinCompilationTask::class.java).configureEach {
-        if(name != "kspCommonMainKotlinMetadata") {
+        if (name != "kspCommonMainKotlinMetadata") {
             dependsOn("kspCommonMainKotlinMetadata")
         }
     }

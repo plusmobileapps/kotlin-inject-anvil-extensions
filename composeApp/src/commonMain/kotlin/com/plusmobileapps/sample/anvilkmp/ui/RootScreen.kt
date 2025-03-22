@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
-import com.plusmobileapps.sample.anvilkmp.blocs.RootBloc
+import com.plusmobileapps.sample.anvilkmp.blocs.root.RootBloc
 
 @Composable
 fun RootScreen(

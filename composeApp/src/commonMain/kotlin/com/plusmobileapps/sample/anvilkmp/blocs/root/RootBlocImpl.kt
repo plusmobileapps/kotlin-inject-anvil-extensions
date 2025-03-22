@@ -1,23 +1,25 @@
-package com.plusmobileapps.sample.anvilkmp.blocs
+package com.plusmobileapps.sample.anvilkmp.blocs.root
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
+import com.plusmobileapps.sample.anvilkmp.blocs.home.HomeBloc
+import com.plusmobileapps.sample.anvilkmp.blocs.home.HomeBlocFactory
 import kotlinx.serialization.Serializable
 import me.tatarka.inject.annotations.Assisted
+import me.tatarka.inject.annotations.AssistedFactory
+import me.tatarka.inject.annotations.Inject
 
-interface RootBloc {
-    val routerState: Value<ChildStack<*, Child>>
-
-    sealed class Child {
-        data class Home(val bloc: HomeBloc) : Child()
-    }
+@AssistedFactory
+interface RootBlocImplFactory {
+    fun create(
+        context: ComponentContext,
+    ): RootBloc
 }
 
-typealias RootBlocFactory = (ComponentContext) -> RootBloc
-
+@Inject
 class RootBlocImpl(
     @Assisted context: ComponentContext,
     private val homeBloc: HomeBlocFactory,
