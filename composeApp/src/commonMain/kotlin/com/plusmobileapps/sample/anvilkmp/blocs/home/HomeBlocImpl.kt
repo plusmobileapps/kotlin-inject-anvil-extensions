@@ -7,18 +7,16 @@ import com.plusmobileapps.sample.anvilkmp.Greeting
 import com.plusmobileapps.sample.anvilkmp.data.Repository
 import com.plusmobileapps.sample.anvilkmp.util.Consumer
 import me.tatarka.inject.annotations.Assisted
-import me.tatarka.inject.annotations.AssistedFactory
 import me.tatarka.inject.annotations.Inject
-
-@AssistedFactory
-interface HomeBlocImplFactory {
-    fun create(
-        context: ComponentContext,
-        output: Consumer<HomeBloc.Output>,
-    ): HomeBlocImpl
-}
+import software.amazon.lastmile.kotlin.inject.anvil.AppScope
+import software.amazon.lastmile.kotlin.inject.anvil.ContributesAssistedFactory
 
 @Inject
+@ContributesAssistedFactory(
+    scope = AppScope::class,
+    boundType = HomeBloc::class,
+    assistedFactory = HomeBlocFactory::class,
+)
 class HomeBlocImpl(
     @Assisted context: ComponentContext,
     @Assisted private val output: Consumer<HomeBloc.Output>,

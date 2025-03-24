@@ -9,17 +9,16 @@ import com.plusmobileapps.sample.anvilkmp.blocs.home.HomeBloc
 import com.plusmobileapps.sample.anvilkmp.blocs.home.HomeBlocFactory
 import kotlinx.serialization.Serializable
 import me.tatarka.inject.annotations.Assisted
-import me.tatarka.inject.annotations.AssistedFactory
 import me.tatarka.inject.annotations.Inject
-
-@AssistedFactory
-interface RootBlocImplFactory {
-    fun create(
-        context: ComponentContext,
-    ): RootBloc
-}
+import software.amazon.lastmile.kotlin.inject.anvil.AppScope
+import software.amazon.lastmile.kotlin.inject.anvil.ContributesAssistedFactory
 
 @Inject
+@ContributesAssistedFactory(
+    scope = AppScope::class,
+    boundType = RootBloc::class,
+    assistedFactory = RootBlocFactory::class,
+)
 class RootBlocImpl(
     @Assisted context: ComponentContext,
     private val homeBloc: HomeBlocFactory,
