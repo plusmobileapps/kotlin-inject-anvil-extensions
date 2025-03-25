@@ -6,7 +6,6 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
 import com.plusmobileapps.sample.anvilkmp.blocs.home.HomeBloc
-import com.plusmobileapps.sample.anvilkmp.blocs.home.HomeBlocFactory
 import kotlinx.serialization.Serializable
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
@@ -16,12 +15,11 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesAssistedFactory
 @Inject
 @ContributesAssistedFactory(
     scope = AppScope::class,
-    boundType = RootBloc::class,
-    assistedFactory = RootBlocFactory::class,
+    assistedFactory = RootBloc.Factory::class,
 )
 class RootBlocImpl(
     @Assisted context: ComponentContext,
-    private val homeBloc: HomeBlocFactory,
+    private val homeBloc: HomeBloc.Factory,
 ) : RootBloc, ComponentContext by context {
 
     private val navigation = StackNavigation<Configuration>()

@@ -14,8 +14,7 @@ import software.amazon.lastmile.kotlin.inject.anvil.ContributesAssistedFactory
 @Inject
 @ContributesAssistedFactory(
     scope = AppScope::class,
-    boundType = HomeBloc::class,
-    assistedFactory = HomeBlocFactory::class,
+    assistedFactory = HomeBloc.Factory::class,
 )
 class HomeBlocImpl(
     @Assisted context: ComponentContext,

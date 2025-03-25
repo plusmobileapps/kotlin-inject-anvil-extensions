@@ -1,8 +1,9 @@
 package com.plusmobileapps.sample.anvilkmp.di
 
-import com.plusmobileapps.sample.anvilkmp.blocs.root.RootBlocFactory
+import com.plusmobileapps.sample.anvilkmp.blocs.root.RootBloc
+
 
 interface AppComponent {
-    abstract val rootBlocFactory: RootBlocFactory
+    val rootBlocFactory: RootBloc.Factory
 }
 
