@@ -1,4 +1,4 @@
-package com.plusmobileapps.kotlin.inject.decompose.runtime
+package com.plusmobileapps.kotlin.inject.runtime
 
 import software.amazon.lastmile.kotlin.inject.anvil.extend.ContributingAnnotation
 import kotlin.annotation.AnnotationTarget.CLASS
@@ -43,8 +43,10 @@ import kotlin.reflect.KClass
  *
  * @Inject
  * @ContributesAssistedFactory(
+ *    scope = AppScope::class,
  *    assistedFactory = MovieRepositoryFactory::class,
  * )
+ * @SingleIn(AppScope::class)
  * class MovieRepositoryImpl(
  *      @Assisted val id: String,
  * ) : MovieRepository
@@ -54,6 +56,11 @@ import kotlin.reflect.KClass
 @Repeatable
 @ContributingAnnotation
 public annotation class ContributesAssistedFactory(
+    /**
+     * The scope in which to include this contributed binding.
+     */
+    val scope: KClass<*>,
+
     /**
      * The assisted factory that will be used to create instances of the bound type.
      */

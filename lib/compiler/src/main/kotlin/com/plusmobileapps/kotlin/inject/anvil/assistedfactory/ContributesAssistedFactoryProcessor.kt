@@ -4,8 +4,10 @@ package com.plusmobileapps.kotlin.inject.anvil.assistedfactory
 
 import com.google.auto.service.AutoService
 import com.google.devtools.ksp.KspExperimental
+import com.google.devtools.ksp.getAllSuperTypes
 import com.google.devtools.ksp.getConstructors
 import com.google.devtools.ksp.isAnnotationPresent
+import com.google.devtools.ksp.isPublic
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.processing.Resolver
@@ -20,13 +22,13 @@ import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.google.devtools.ksp.symbol.KSType
 import com.google.devtools.ksp.symbol.KSValueParameter
 import com.plusmobileapps.kotlin.inject.anvil.assistedfactory.util.addOriginAnnotation
-import com.plusmobileapps.kotlin.inject.anvil.assistedfactory.util.checkIsPublic
 import com.plusmobileapps.kotlin.inject.anvil.assistedfactory.util.findAnnotations
 import com.plusmobileapps.kotlin.inject.anvil.assistedfactory.util.innerClassNames
 import com.plusmobileapps.kotlin.inject.anvil.assistedfactory.util.requireContainingFile
 import com.plusmobileapps.kotlin.inject.anvil.assistedfactory.util.requireQualifiedName
 import com.plusmobileapps.kotlin.inject.anvil.assistedfactory.util.safeClassName
-import com.plusmobileapps.kotlin.inject.decompose.runtime.ContributesAssistedFactory
+import com.plusmobileapps.kotlin.inject.runtime.ContributesAssistedFactory
+import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
@@ -34,16 +36,19 @@ import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.LambdaTypeName
 import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.ksp.addOriginatingKSFile
 import com.squareup.kotlinpoet.ksp.toClassName
 import com.squareup.kotlinpoet.ksp.toTypeName
 import com.squareup.kotlinpoet.ksp.writeTo
 import me.tatarka.inject.annotations.Assisted
+import me.tatarka.inject.annotations.Inject
 import me.tatarka.inject.annotations.Provides
+import software.amazon.lastmile.kotlin.inject.anvil.ContributesTo
 import kotlin.reflect.KClass
 
-private const val LOOKUP_PACKAGE = "com.plusmobileapps.kotlin.inject.anvil.assistedfactory"
+const val LOOKUP_PACKAGE = "com.plusmobileapps.kotlin.inject.anvil"
 
 internal class ContributesAssistedFactoryProcessor(
     private val codeGenerator: CodeGenerator,
@@ -68,7 +73,7 @@ internal class ContributesAssistedFactoryProcessor(
             .getSymbolsWithAnnotation(ContributesAssistedFactory::class.requireQualifiedName())
             .filterIsInstance<KSClassDeclaration>()
             .onEach {
-                it.checkIsPublic(logger)
+                validate(annotatedClass = it)
             }
             .forEach {
                 generateComponentInterface(it)
@@ -76,6 +81,23 @@ internal class ContributesAssistedFactoryProcessor(
 
         return emptyList()
     }
+
+    private fun validate(annotatedClass: KSClassDeclaration) {
+        require(annotatedClass.isPublic()) {
+            """${annotatedClass.toClassName()} must be public.
+                        | kotlin-inject does not support components that are not public."""
+                .trimMargin()
+        }
+        require(annotatedClass.isInjected()) {
+            """${annotatedClass.toClassName()} must be annotated with @Inject."""
+        }
+    }
+
+    @OptIn(KspExperimental::class)
+    private fun KSAnnotated.isInjected(): Boolean {
+        return isAnnotationPresent(Inject::class)
+    }
+
 
     @Suppress("LongMethod")
     private fun generateComponentInterface(clazz: KSClassDeclaration) {
@@ -106,6 +128,8 @@ internal class ContributesAssistedFactoryProcessor(
             )
         }
 
+        val scope = getScope(clazz)
+
         val fileSpec = FileSpec.builder(componentClassName)
             .apply {
                 addImport(
@@ -124,6 +148,7 @@ internal class ContributesAssistedFactoryProcessor(
                     function = generatedFunction,
                     realAssistedFactory = realAssistedFactory,
                     constructorParameters = constructorParameters,
+                    scope = scope,
                 ),
             )
             .build()
@@ -137,10 +162,16 @@ internal class ContributesAssistedFactoryProcessor(
         function: GeneratedFunction,
         realAssistedFactory: LambdaTypeName,
         constructorParameters: List<KSValueParameter>,
+        scope: TypeName,
     ): TypeSpec = TypeSpec
         .interfaceBuilder(componentClassName)
         .addOriginatingKSFile(clazz.requireContainingFile(logger))
         .addOriginAnnotation(clazz)
+        .addAnnotation(
+            AnnotationSpec.builder(ContributesTo::class)
+                .addMember("%T::class", scope)
+                .build()
+        )
         .addFunction(
             FunSpec
                 .builder(
@@ -408,5 +439,22 @@ internal class ContributesAssistedFactoryProcessor(
                 ClassName(declaration.packageName.asString(), declaration.simpleName.asString())
             }
         }
+    }
+
+    private fun getScope(element: KSClassDeclaration): TypeName {
+        // There is a simpler way to do this using the experimental getAnnotationsByType, however it doesn't
+        // work when attempting to retrieve the type of the scope argument if it's not on this project's classpath.
+        val annotation = element.annotations
+            .first { annotation ->
+                val clazz = ContributesAssistedFactory::class
+                annotation.shortName.asString() == clazz.simpleName
+                        && annotation.annotationType.resolve().declaration.qualifiedName?.asString() == clazz.qualifiedName
+            }
+        val scopeArgument = annotation.arguments
+            .first { argument ->
+                argument.name?.asString() == ContributesAssistedFactory::scope.name
+            }
+            .value as KSType
+        return scopeArgument.toTypeName()
     }
 }

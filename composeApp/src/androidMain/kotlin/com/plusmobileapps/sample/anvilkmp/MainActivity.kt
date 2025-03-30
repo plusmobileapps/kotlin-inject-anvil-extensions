@@ -12,7 +12,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val component = (application as MyApplication).component
-        val rootBloc = component.rootBlocFactory(defaultComponentContext())
+        val rootBloc = component.rootBlocFactory.create(defaultComponentContext())
         setContent {
             RootScreen(bloc = rootBloc)
         }

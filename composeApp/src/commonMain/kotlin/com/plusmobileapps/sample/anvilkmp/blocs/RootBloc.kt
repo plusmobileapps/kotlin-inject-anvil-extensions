@@ -5,10 +5,11 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
-import com.plusmobileapps.kotlin.inject.decompose.runtime.ContributesAssistedFactory
+import com.plusmobileapps.kotlin.inject.runtime.ContributesAssistedFactory
 import kotlinx.serialization.Serializable
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
+import software.amazon.lastmile.kotlin.inject.anvil.AppScope
 
 interface RootBloc {
     val routerState: Value<ChildStack<*, Child>>
@@ -23,7 +24,10 @@ interface RootBloc {
 }
 
 @Inject
-@ContributesAssistedFactory(assistedFactory = RootBloc.Factory::class)
+@ContributesAssistedFactory(
+    scope = AppScope::class,
+    assistedFactory = RootBloc.Factory::class,
+)
 class RootBlocImpl(
     @Assisted context: ComponentContext,
     private val homeBloc: HomeBloc.Factory,
