@@ -1,14 +1,12 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Desktop.
+# Kotlin Inject Anvil Extensions
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+A collection of extensions on top of [kotlin-inject-anvil](https://github.com/amzn/kotlin-inject-anvil) to help reduce boiler plate with dependency injection. 
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## Extensions
+
+* [Assisted factory](https://plusmobileapps.com/kotlin-inject-anvil-extensions/assisted-factory/) - reduce boiler plate by binding factory interfaces to dependencies using the `@Assisted` annotation.
 
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## Resources
+
+Please refer to the [documentation](https://plusmobileapps.com/kotlin-inject-anvil-extensions/) for reference on how to setup and use.

@@ -107,7 +107,7 @@ interface MovieRepository {
 class RealMovieRepository(
     @Assisted val id: String,
 ) : MovieRepository {
-    override fun get(): Moview = TODO()
+    override fun get(): Movie = TODO()
 }
 ```
 
