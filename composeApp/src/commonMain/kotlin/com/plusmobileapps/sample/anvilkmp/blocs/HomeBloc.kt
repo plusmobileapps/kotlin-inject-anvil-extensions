@@ -3,7 +3,7 @@ package com.plusmobileapps.sample.anvilkmp.blocs
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
-import com.plusmobileapps.kotlin.inject.runtime.ContributesAssistedFactory
+import com.plusmobileapps.kotlin.inject.anvil.extensions.assistedfactory.runtime.ContributesAssistedFactory
 import com.plusmobileapps.sample.anvilkmp.Greeting
 import com.plusmobileapps.sample.anvilkmp.data.Repository
 import com.plusmobileapps.sample.anvilkmp.util.Consumer

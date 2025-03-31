@@ -1,6 +1,6 @@
 package software.amazon.test
 
-import com.plusmobileapps.kotlin.inject.runtime.ContributesAssistedFactory
+import com.plusmobileapps.kotlin.inject.anvil.extensions.assistedfactory.runtime.ContributesAssistedFactory
 import me.tatarka.inject.annotations.Inject
 import me.tatarka.inject.annotations.Assisted
 interface Base

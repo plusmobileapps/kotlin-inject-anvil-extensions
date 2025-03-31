@@ -1,4 +1,4 @@
-package com.plusmobileapps.kotlin.inject.anvil.assistedfactory.util
+package com.plusmobileapps.kotlin.inject.anvil.extensions.assistedfactory.compiler.util
 
 import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.symbol.KSAnnotation

@@ -1,4 +1,4 @@
-package com.plusmobileapps.kotlin.inject.runtime
+package com.plusmobileapps.kotlin.inject.anvil.extensions.assistedfactory.runtime
 
 import software.amazon.lastmile.kotlin.inject.anvil.extend.ContributingAnnotation
 import kotlin.annotation.AnnotationTarget.CLASS

@@ -2,15 +2,14 @@
 
 package com.plusmobileapps.kotlin.inject.anvil.assistedfactory
 
+import com.plusmobileapps.kotlin.inject.anvil.extensions.assistedfactory.compiler.ContributesAssistedFactoryProcessor
+import com.plusmobileapps.kotlin.inject.anvil.extensions.assistedfactory.compiler.LOOKUP_PACKAGE
 import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation
 import com.tschuchort.compiletesting.SourceFile
 import com.tschuchort.compiletesting.configureKsp
-import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.equals.shouldBeEqual
-import io.kotest.matchers.shouldBe
-import io.kotest.matchers.string.shouldContain
 import org.intellij.lang.annotations.Language
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.jetbrains.kotlin.descriptors.runtime.structure.primitiveByWrapper
@@ -25,7 +24,7 @@ class ContributesAssistedFactoryProcessorTest {
             """
             package software.amazon.test
     
-            import com.plusmobileapps.kotlin.inject.runtime.ContributesAssistedFactory
+            import com.plusmobileapps.kotlin.inject.anvil.extensions.assistedfactory.runtime.ContributesAssistedFactory
             import me.tatarka.inject.annotations.Inject
             import me.tatarka.inject.annotations.Assisted
             interface Base
@@ -65,7 +64,7 @@ class ContributesAssistedFactoryProcessorTest {
             """
             package software.amazon.test
     
-            import com.plusmobileapps.kotlin.inject.runtime.ContributesAssistedFactory
+            import com.plusmobileapps.kotlin.inject.anvil.extensions.assistedfactory.runtime.ContributesAssistedFactory
             import me.tatarka.inject.annotations.Inject
             import me.tatarka.inject.annotations.Assisted
 
@@ -107,7 +106,7 @@ class ContributesAssistedFactoryProcessorTest {
             """
             package software.amazon.test
     
-            import com.plusmobileapps.kotlin.inject.runtime.ContributesAssistedFactory
+            import com.plusmobileapps.kotlin.inject.anvil.extensions.assistedfactory.runtime.ContributesAssistedFactory
             import me.tatarka.inject.annotations.Inject
             import me.tatarka.inject.annotations.Assisted
             import software.amazon.lastmile.kotlin.inject.anvil.AppScope

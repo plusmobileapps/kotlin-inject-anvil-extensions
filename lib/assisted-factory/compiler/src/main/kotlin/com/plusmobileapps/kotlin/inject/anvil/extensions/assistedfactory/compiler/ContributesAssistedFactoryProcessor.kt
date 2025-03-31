@@ -1,10 +1,9 @@
 @file:OptIn(KspExperimental::class)
 
-package com.plusmobileapps.kotlin.inject.anvil.assistedfactory
+package com.plusmobileapps.kotlin.inject.anvil.extensions.assistedfactory.compiler
 
 import com.google.auto.service.AutoService
 import com.google.devtools.ksp.KspExperimental
-import com.google.devtools.ksp.getAllSuperTypes
 import com.google.devtools.ksp.getConstructors
 import com.google.devtools.ksp.isAnnotationPresent
 import com.google.devtools.ksp.isPublic
@@ -21,13 +20,13 @@ import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.google.devtools.ksp.symbol.KSType
 import com.google.devtools.ksp.symbol.KSValueParameter
-import com.plusmobileapps.kotlin.inject.anvil.assistedfactory.util.addOriginAnnotation
-import com.plusmobileapps.kotlin.inject.anvil.assistedfactory.util.findAnnotations
-import com.plusmobileapps.kotlin.inject.anvil.assistedfactory.util.innerClassNames
-import com.plusmobileapps.kotlin.inject.anvil.assistedfactory.util.requireContainingFile
-import com.plusmobileapps.kotlin.inject.anvil.assistedfactory.util.requireQualifiedName
-import com.plusmobileapps.kotlin.inject.anvil.assistedfactory.util.safeClassName
-import com.plusmobileapps.kotlin.inject.runtime.ContributesAssistedFactory
+import com.plusmobileapps.kotlin.inject.anvil.extensions.assistedfactory.compiler.util.addOriginAnnotation
+import com.plusmobileapps.kotlin.inject.anvil.extensions.assistedfactory.compiler.util.findAnnotations
+import com.plusmobileapps.kotlin.inject.anvil.extensions.assistedfactory.compiler.util.innerClassNames
+import com.plusmobileapps.kotlin.inject.anvil.extensions.assistedfactory.compiler.util.requireContainingFile
+import com.plusmobileapps.kotlin.inject.anvil.extensions.assistedfactory.compiler.util.requireQualifiedName
+import com.plusmobileapps.kotlin.inject.anvil.extensions.assistedfactory.compiler.util.safeClassName
+import com.plusmobileapps.kotlin.inject.anvil.extensions.assistedfactory.runtime.ContributesAssistedFactory
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
@@ -48,7 +47,7 @@ import me.tatarka.inject.annotations.Provides
 import software.amazon.lastmile.kotlin.inject.anvil.ContributesTo
 import kotlin.reflect.KClass
 
-const val LOOKUP_PACKAGE = "com.plusmobileapps.kotlin.inject.anvil"
+const val LOOKUP_PACKAGE = "com.plusmobileapps.kotlin.inject.anvil.extensions.assistedfactory"
 
 internal class ContributesAssistedFactoryProcessor(
     private val codeGenerator: CodeGenerator,

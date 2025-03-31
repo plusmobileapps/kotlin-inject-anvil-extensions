@@ -8,9 +8,6 @@ plugins {
     alias(libs.plugins.mavenPublish)
 }
 
-group = "com.plusmobileapps.kotlin.inject.anvil.extensions.runtime"
-version = libs.versions.assistedFactory.get()
-
 kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
