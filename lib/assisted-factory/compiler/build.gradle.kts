@@ -7,9 +7,6 @@ plugins {
     alias(libs.plugins.mavenPublish)
 }
 
-group = "com.plusmobileapps.kotlin.inject.anvil.extensions.compiler"
-version = libs.versions.assistedFactory.get()
-
 java {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
