@@ -26,7 +26,7 @@ tasks.named<Test>("test") {
 
 dependencies {
     // Regular dependencies
-    implementation(project(":lib:runtime"))
+    implementation(project(":lib:assisted-factory:runtime"))
     implementation(libs.kotlin.inject.core.runtime)
     implementation(libs.kotlin.inject.anvil.runtime)
     implementation(libs.kotlin.inject.anvil.runtime.optional)
