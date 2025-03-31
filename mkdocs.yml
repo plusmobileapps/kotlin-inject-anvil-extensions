@@ -1,0 +1,46 @@
+site_name: Kotlin Inject Anvil Extensions
+site_description: Extensions on top of kotlin inject anvil to reduce boilerplate.
+site_url: https://plusmobileapps.com
+repo_url: https://github.com/plusmobileapps/kotlin-inject-anvil-extensions
+
+theme:
+  name: material
+  logo: assets/plus-logo.jpeg
+  favicon: assets/plus-logo.jpeg
+  features: 
+    - navigation.tabs
+    - content.code.copy
+  palette:
+
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default 
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+
+plugins:
+  - search
+
+markdown_extensions:
+  - md_in_html
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+
+nav:
+  - Overview: index.md
+  - Assisted Factory: assisted-factory.md
