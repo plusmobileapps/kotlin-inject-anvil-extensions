@@ -4,7 +4,11 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinMultiplatform)
+    id("runtime.publication")
 }
+
+group = "com.plusmobileapps.kotlin.inject.anvil.extensions.runtime"
+version = libs.versions.assistedFactory.get()
 
 kotlin {
     androidTarget {

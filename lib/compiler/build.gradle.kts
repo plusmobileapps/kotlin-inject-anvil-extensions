@@ -3,9 +3,11 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.jvm)
     alias(libs.plugins.googleKsp)
+    id("compiler.publication")
 }
 
-group = "com.plusmobileapps.kotlin.inject.anvil.decompose.compiler"
+group = "com.plusmobileapps.kotlin.inject.anvil.extensions.compiler"
+version = libs.versions.assistedFactory.get()
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
