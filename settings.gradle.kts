@@ -29,6 +29,6 @@ dependencyResolutionManagement {
     }
 }
 
-include(":composeApp")
+include(":samples:assisted-factory:composeApp")
 include(":lib:assisted-factory:compiler")
 include(":lib:assisted-factory:runtime")
