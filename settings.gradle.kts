@@ -25,7 +25,12 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 
 include(":composeApp")
+includeBuild("publishing-plugins/compiler")
+includeBuild("publishing-plugins/runtime")
+include(":lib:compiler")
+include(":lib:runtime")

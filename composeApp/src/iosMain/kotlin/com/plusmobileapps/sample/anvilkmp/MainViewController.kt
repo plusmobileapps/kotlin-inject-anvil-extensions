@@ -9,5 +9,5 @@ import platform.UIKit.UIApplication
 fun MainViewController() = ComposeUIViewController {
     val component = IosAppComponent::class.createIosAppComponent(UIApplication.sharedApplication)
     val defaultContext = DefaultComponentContext(ApplicationLifecycle())
-    RootScreen(bloc = component.rootBlocFactory.invoke(defaultContext))
+    RootScreen(bloc = component.rootBlocFactory.create(defaultContext))
 }

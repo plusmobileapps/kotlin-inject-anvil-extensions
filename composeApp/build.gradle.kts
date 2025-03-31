@@ -46,18 +46,20 @@ kotlin {
             implementation(libs.kotlin.inject.anvil.runtime)
             implementation(libs.kotlin.inject.anvil.runtime.optional)
         }
-        commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodel)
-            implementation(libs.androidx.lifecycle.runtime.compose)
-            implementation(libs.arkivanov.decompose.core)
-            implementation(libs.arkivanov.decompose.compose.extensions)
-            implementation(libs.kotlin.serialization.json)
+        val commonMain by getting {
+            dependencies {
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material)
+                implementation(compose.ui)
+                implementation(compose.components.resources)
+                implementation(compose.components.uiToolingPreview)
+                implementation(libs.androidx.lifecycle.viewmodel)
+                implementation(libs.androidx.lifecycle.runtime.compose)
+                implementation(libs.arkivanov.decompose.core)
+                implementation(libs.arkivanov.decompose.compose.extensions)
+                implementation(libs.kotlin.serialization.json)
+            }
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -123,6 +125,12 @@ dependencies {
     commonMainImplementation(libs.kotlin.inject.core.runtime)
     targets.forEach {
         add(it, libs.kotlin.inject.core.compiler)
+    }
+
+    // kotlin-inject-anvil-assisted-factory
+    commonMainImplementation(project(":lib:runtime"))
+    targets.forEach {
+        add(it, project(":lib:compiler"))
     }
 
     // kotlin-inject-anvil
