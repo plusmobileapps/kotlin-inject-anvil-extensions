@@ -30,7 +30,5 @@ dependencyResolutionManagement {
 }
 
 include(":composeApp")
-includeBuild("publishing-plugins/compiler")
-includeBuild("publishing-plugins/runtime")
 include(":lib:assisted-factory:compiler")
 include(":lib:assisted-factory:runtime")

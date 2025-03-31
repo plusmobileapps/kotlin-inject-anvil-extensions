@@ -8,4 +8,5 @@ plugins {
     alias(libs.plugins.jvm) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.googleKsp) apply false
+    alias(libs.plugins.mavenPublish) apply false
 }
