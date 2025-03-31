@@ -25,6 +25,7 @@ kotlinx-coroutines = "1.9.0"
 kotlin-inject-core = "0.7.2"
 kotlin-inject-anvil= "0.1.2"
 kotlin-poet = "2.1.0"
+maven-publish = "0.31.0"
 decompose = "3.1.0"
 essenty = "2.1.0"
 
@@ -72,4 +73,5 @@ composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "k
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 googleKsp = { id = "com.google.devtools.ksp", version.ref = "google-ksp" }
+mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

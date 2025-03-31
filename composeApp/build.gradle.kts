@@ -128,9 +128,9 @@ dependencies {
     }
 
     // kotlin-inject-anvil-assisted-factory
-    commonMainImplementation(project(":lib:runtime"))
+    commonMainImplementation(project(":lib:assisted-factory:runtime"))
     targets.forEach {
-        add(it, project(":lib:compiler"))
+        add(it, project(":lib:assisted-factory:compiler"))
     }
 
     // kotlin-inject-anvil
