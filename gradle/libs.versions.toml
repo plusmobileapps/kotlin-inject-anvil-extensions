@@ -1,5 +1,5 @@
 [versions]
-assistedFactory = "0.1-alpha03"
+assistedFactory = "0.1"
 agp = "8.5.2"
 android-compileSdk = "34"
 android-minSdk = "24"
